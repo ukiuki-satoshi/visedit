@@ -11,7 +11,7 @@ VisEdit is a visualiation library for string edit and difference between two str
 
 install using pip:
 
-```sh
+```
 $ pip install visedit
 ```
 
@@ -19,7 +19,7 @@ $ pip install visedit
 
 ## Generate formatted text or html
 
-```py
+```
 from visedit import StringEdit
 source_str = "kitten"
 target_str = "sitting"
@@ -32,18 +32,18 @@ html = se.generate_html()
 
 ## Change color setting
 
-```py
+```
 # setting for text
 e = StringEdit(source_str, target_str, text_color_settings={
-    "wrong": "YELLOW",
-    "correct": "GREEN",
-    "base": "WHITE",
+"wrong": "YELLOW",
+"correct": "GREEN",
+"base": "WHITE",
 })
 # setting for html
 e = StringEdit(source_str, target_str, html_color_settings={
-    "wrong": "YELLOW",
-    "correct": "GREEN",
-    "base": "WHITE",
+"wrong": "YELLOW",
+"correct": "GREEN",
+"base": "WHITE",
 })
 ```
 
