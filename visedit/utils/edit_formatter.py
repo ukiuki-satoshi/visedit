@@ -59,10 +59,10 @@ class Textizer:
     @staticmethod
     def get_char_width(char):
         char_type = unicodedata.east_asian_width(char)
-        if char_type in ["Na", "H"]:
-            return 1
-        else:
+        if char_type in ["W", "F"]:
             return 2
+        else:
+            return 1
         
     @staticmethod
     def padding_char(char):
