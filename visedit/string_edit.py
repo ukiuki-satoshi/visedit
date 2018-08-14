@@ -1,6 +1,10 @@
-from .utils import Levenshtein, HTMLFormatter, TextFormatter, color_settings
+from .utils import color_settings
+from .utils import Levenshtein
+from .utils import HTMLFormatter, TextFormatter
+
 
 class StringEdit(object):
+
 
     def _generate_comparison(self, fm):
         s1 = self._source_str
