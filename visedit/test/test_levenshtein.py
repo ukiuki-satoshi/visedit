@@ -22,6 +22,3 @@ class TestLevenshtein(TestCase):
     def test_levenshtein_table(self, src, dist, expect):
         actual = Levenshtein.leven(src, dist)
         self.assertEqual(expect, actual)
-
-    def test_failure(self):
-        self.assertTrue(1 == 0)
