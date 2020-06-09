@@ -1,9 +1,9 @@
 # Abstract
-VisEdit is a visualiation library for string edit and difference between two strings.
+VisEdit is a visualiation library for string edit and differences between two strings.
 
 # Main Features
 
-* visualization difference between two strings
+* visualization differences between two strings
 * generate formatted text and html
 
 
