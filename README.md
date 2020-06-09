@@ -1,9 +1,9 @@
 # Abstract
-VisEdit is a visualiation library for string edit and difference between two strings.
+VisEdit is a visualiation library for string edit and differences between two strings.
 
 # Main Features
 
-* visualization edits between two strings
+* visualization differences between two strings
 * generate formatted text and html
 
 
@@ -47,7 +47,7 @@ e = StringEdit(source_str, target_str, html_color_settings={
 })
 ```
 
-available colors is:
+available colors are:
 
 * BLACK
 * RED
