@@ -1,5 +1,8 @@
 # Changes
 
+## 1.0.4 2020-06-20
+* enable truncate spaces in StringEdit.generate_text()
+
 ## 1.0.3 2018-06-07
 * fix bug that ambiguous character width was counted as 2
 

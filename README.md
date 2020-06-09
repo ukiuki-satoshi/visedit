@@ -26,6 +26,9 @@ target_str = "sitting"
 se = StringEdit(source_str, target_str)
 text = se.generate_text()
 print(text)
+
+# spaces will be truncated if truncate=True
+text = se.generate_text(truncate=True)
 # also available html as well as text
 html = se.generate_html()
 ```
