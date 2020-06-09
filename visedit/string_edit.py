@@ -49,8 +49,8 @@ class StringEdit(object):
     def generate_html(self):
         return self._generate_comparison(HTMLFormatter(self._html_color_settings))
 
-    def generate_text(self):
-        return self._generate_comparison(TextFormatter(self._text_color_settings))
+    def generate_text(self, truncate=False):
+        return self._generate_comparison(TextFormatter(self._text_color_settings, truncate=truncate))
 
     def get_edit_distance(self):
         return len(list(filter(lambda s: s != "noedit", self._edit_list)))
