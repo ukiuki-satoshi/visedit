@@ -101,14 +101,18 @@ class HTMLFormatter(object):
         return Tagger.table(Tagger.tr(t1) + Tagger.tr(t2))
     
 class TextFormatter(object):
-    def __init__(self, color_settings):
+    def __init__(self, color_settings, truncate=False):
         self._cs = color_settings
+        self._truncate = truncate
 
     def elem(self, text):
         return Textizer.colored(text, self._cs["base"])
 
     def padding(self, text):
-        return Textizer.padding_char(text)
+        if self._truncate:
+            return text
+        else:
+            return Textizer.padding_char(text)
 
     def wrong(self, text):
         return Textizer.colored(text, self._cs["wrong"])
