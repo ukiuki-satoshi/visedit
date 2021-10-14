@@ -3,7 +3,7 @@ VisEdit is a visualiation library for string edit and differences between two st
 
 # Main Features
 
-* visualization differences between two strings
+* visualize differences between two strings
 * generate formatted text and html
 
 
@@ -38,15 +38,15 @@ html = se.generate_html()
 ```
 # setting for text
 e = StringEdit(source_str, target_str, text_color_settings={
-"wrong": "YELLOW",
-"correct": "GREEN",
-"base": "WHITE",
+    "wrong": "YELLOW",
+    "correct": "GREEN",
+    "base": "WHITE",
 })
 # setting for html
 e = StringEdit(source_str, target_str, html_color_settings={
-"wrong": "YELLOW",
-"correct": "GREEN",
-"base": "WHITE",
+    "wrong": "YELLOW",
+    "correct": "GREEN",
+    "base": "WHITE",
 })
 ```
 
