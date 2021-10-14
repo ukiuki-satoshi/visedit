@@ -38,15 +38,15 @@ html = se.generate_html()
 ```
 # setting for text
 e = StringEdit(source_str, target_str, text_color_settings={
-    "wrong": "YELLOW",
-    "correct": "GREEN",
-    "base": "WHITE",
+"wrong": "YELLOW",
+"correct": "GREEN",
+"base": "WHITE",
 })
 # setting for html
 e = StringEdit(source_str, target_str, html_color_settings={
-    "wrong": "YELLOW",
-    "correct": "GREEN",
-    "base": "WHITE",
+"wrong": "YELLOW",
+"correct": "GREEN",
+"base": "WHITE",
 })
 ```
 
