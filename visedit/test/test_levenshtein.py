@@ -40,7 +40,7 @@ class TestLevenshtein(TestCase):
         ),
     ])
     def test_string_edit_path(self, src, dist, expect):
-        cost_table = Levenshtein.leven("sitting", "kitten")
+        cost_table = Levenshtein.leven(src, dist)
         actual = Levenshtein.find_path(cost_table)
         self.assertEqual(expect, actual)
 
