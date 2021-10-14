@@ -41,9 +41,11 @@ class Levenshtein(object):
         return cost_table
 
     @staticmethod
-    def find_path(cost_table):
+    def find_path(cost_table, *args, **kwargs):
         """
         :cost_table: levenshtein distance table which is calculated Levenshtein.leven  # NOQA
+        :*args: Not used. for backward compatible.
+        :**kwargs: Not used. for backward compatible.
         :return: return list of edit types
         """
 
