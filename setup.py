@@ -1,24 +1,34 @@
-from setuptools import setup, find_packages
+import re
 from codecs import open
 from os import path
-import re
+
+from setuptools import find_packages, setup
 
 package_name = 'visedit'
 
 root_dir = path.abspath(path.dirname(__file__))
 
+
 def _requirements():
-    return [name.rstrip() for name in open(path.join(root_dir, 'requirements.txt')).readlines()]
+    return [
+        name.rstrip() for name
+        in open(path.join(root_dir, 'requirements.txt')).readlines()
+    ]
+
 
 def _test_requirements():
-    return [name.rstrip() for name in open(path.join(root_dir, 'test-requirements.txt')).readlines()]
-    
+    return [
+        name.rstrip() for name
+        in open(path.join(root_dir, 'test-requirements.txt')).readlines()
+    ]
+
+
 with open(path.join(root_dir, package_name, '__init__.py')) as f:
     init_text = f.read()
-    version = re.search(r'__version__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
-    license = re.search(r'__license__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
-    author = re.search(r'__author__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
-    author_email = re.search(r'__author_email__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
+    version = re.search(r'__version__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)  # NOQA
+    license = re.search(r'__license__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)  # NOQA
+    author = re.search(r'__author__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)  # NOQA
+    author_email = re.search(r'__author_email__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)  # NOQA
     url = re.search(r'__url__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
 
 assert version
@@ -29,14 +39,10 @@ assert url
 
 
 try:
-    import pypandoc
-    long_description = pypandoc.convert("README.md", "rst", format="markdown_github")
-except:    
-    try:
-        with open('README.md', encoding='utf-8') as f:
-            long_description = f.read()
-    except:
-        long_description = ""
+    with open('README.md', encoding='utf-8') as f:
+        long_description = f.read()
+except:  # NOQA
+    long_description = ""
 
 setup(
     name=package_name,
@@ -56,6 +62,7 @@ setup(
 
     description='Python Library to visualize string edit',
     long_description=long_description,
+    long_description_content_type="text/markdown",
     keywords='EditDistance, LevenshteinDistance, NLP',
 
     classifiers=[

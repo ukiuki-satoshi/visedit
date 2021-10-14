@@ -3,7 +3,7 @@ VisEdit is a visualiation library for string edit and differences between two st
 
 # Main Features
 
-* visualization differences between two strings
+* visualize differences between two strings
 * generate formatted text and html
 
 
