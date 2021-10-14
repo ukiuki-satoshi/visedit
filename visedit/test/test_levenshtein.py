@@ -1,9 +1,11 @@
 # coding: utf-8
 
 from unittest import TestCase
+
 from parameterized import parameterized
 
 from visedit.utils import Levenshtein
+
 
 class TestLevenshtein(TestCase):
 
@@ -22,3 +24,23 @@ class TestLevenshtein(TestCase):
     def test_levenshtein_table(self, src, dist, expect):
         actual = Levenshtein.leven(src, dist)
         self.assertEqual(expect, actual)
+
+
+    @parameterized.expand([
+        ("sitting", "kitten",
+            [
+                'rep',
+                'noedit',
+                'noedit',
+                'noedit',
+                'rep',
+                'noedit',
+                'del'
+            ]
+        ),
+    ])
+    def test_string_edit_path(self, src, dist, expect):
+        cost_table = Levenshtein.leven("sitting", "kitten")
+        actual = Levenshtein.find_path(cost_table)
+        self.assertEqual(expect, actual)
+
