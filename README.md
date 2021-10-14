@@ -1,9 +1,9 @@
 # Abstract
-VisEdit is a visualiation library for string edit and difference between two strings.
+VisEdit is a visualiation library for string edit and differences between two strings.
 
 # Main Features
 
-* visualization edits between two strings
+* visualization differences between two strings
 * generate formatted text and html
 
 
@@ -26,6 +26,9 @@ target_str = "sitting"
 se = StringEdit(source_str, target_str)
 text = se.generate_text()
 print(text)
+
+# spaces will be truncated if truncate=True
+text = se.generate_text(truncate=True)
 # also available html as well as text
 html = se.generate_html()
 ```
@@ -47,7 +50,7 @@ e = StringEdit(source_str, target_str, html_color_settings={
 })
 ```
 
-available colors is:
+available colors are:
 
 * BLACK
 * RED
