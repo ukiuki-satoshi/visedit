@@ -1,5 +1,4 @@
 *.pyc
 build/
 dist/
-.tox/
 visedit.egg-info/
