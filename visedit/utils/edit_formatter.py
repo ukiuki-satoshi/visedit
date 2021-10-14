@@ -1,6 +1,5 @@
 import unicodedata
 
-from . import color_settings
 
 class Tagger:
 
@@ -24,19 +23,30 @@ class Tagger:
         if color.upper() not in Tagger.COLOR_CODE:
             raise Exception("Invalid Color: {c}".format(c=color))
         color_code = Tagger.COLOR_CODE[color.upper()]
-        return ''.join(['<span style="color: ', color_code, ';">', text, "</span>"])
-        
+        return ''.join([
+            '<span style="color: ',
+            color_code,
+            ';">',
+            text,
+            "</span>"
+        ])
+
     @staticmethod
     def td(text):
         return ''.join(['<td style="text-align=center">', text, "</td>"])
-    
+
     @staticmethod
     def tr(text):
         return ''.join(["<tr>", text, "</tr>"])
-    
+
     @staticmethod
     def table(text):
-        return ''.join(['<table style="table-layout: fixed;">', text, "</table>"])
+        return ''.join([
+            '<table style="table-layout: fixed;">',
+            text,
+            "</table>"
+        ])
+
 
 class Textizer:
 
@@ -63,7 +73,7 @@ class Textizer:
             return 2
         else:
             return 1
-        
+
     @staticmethod
     def padding_char(char):
         if char in ["", " "]:
@@ -72,17 +82,20 @@ class Textizer:
             return " " + char
         else:
             return char
-        
+
     @staticmethod
     def colored(text, color):
 
         if color.upper() not in Textizer.COLOR_CODE:
             raise Exception("Invalid Color: {c}".format(c=color))
-        return Textizer.COLOR_CODE[color.upper()] + text + Textizer.COLOR_CODE["END"]
+        return Textizer.COLOR_CODE[color.upper()] \
+            + text \
+            + Textizer.COLOR_CODE["END"]
+
 
 class HTMLFormatter(object):
     def __init__(self, color_settings):
-       self._cs = color_settings
+        self._cs = color_settings
 
     def elem(self, text):
         return Tagger.td(
@@ -99,7 +112,8 @@ class HTMLFormatter(object):
 
     def output(self, t1, t2):
         return Tagger.table(Tagger.tr(t1) + Tagger.tr(t2))
-    
+
+
 class TextFormatter(object):
     def __init__(self, color_settings, truncate=False):
         self._cs = color_settings

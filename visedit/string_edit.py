@@ -1,4 +1,5 @@
-from .utils import Levenshtein, HTMLFormatter, TextFormatter, color_settings
+from .utils import HTMLFormatter, Levenshtein, TextFormatter, color_settings
+
 
 class StringEdit(object):
 
@@ -11,7 +12,7 @@ class StringEdit(object):
         result_source = ""
         result_target = ""
         for edit_type in self._edit_list:
-            
+
             if edit_type == "noedit":
                 result_source += fm.elem(fm.padding(s1[i]))
                 result_target += fm.elem(fm.padding(s2[j]))
@@ -30,14 +31,16 @@ class StringEdit(object):
                 result_source += fm.elem(fm.padding(" "))
                 result_target += fm.elem(fm.correct(fm.padding(s2[j])))
                 j += 1
-                
+
         return fm.output(result_source, result_target)
 
-    def __init__(self,
+    def __init__(
+        self,
         source_str,
         target_str,
-        text_color_settings = color_settings.TEXT_COLOR_SETTINGS_PRESETS["default"],
-        html_color_settings = color_settings.HTML_COLOR_SETTINGS_PRESETS["default"]):
+        text_color_settings = color_settings.TEXT_COLOR_SETTINGS_PRESETS["default"],  # NOQA
+        html_color_settings = color_settings.HTML_COLOR_SETTINGS_PRESETS["default"]  # NOQA
+    ):
 
         self._source_str = source_str
         self._target_str = target_str
@@ -47,11 +50,14 @@ class StringEdit(object):
         self._html_color_settings = html_color_settings
 
     def generate_html(self):
-        return self._generate_comparison(HTMLFormatter(self._html_color_settings))
+        return self._generate_comparison(
+            HTMLFormatter(self._html_color_settings)
+        )
 
     def generate_text(self, truncate=False):
-        return self._generate_comparison(TextFormatter(self._text_color_settings, truncate=truncate))
+        return self._generate_comparison(
+            TextFormatter(self._text_color_settings, truncate=truncate)
+        )
 
     def get_edit_distance(self):
         return len(list(filter(lambda s: s != "noedit", self._edit_list)))
-
