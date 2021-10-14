@@ -1,5 +1,4 @@
-import sys
-from typing import Dict, List
+from typing import Dict
 
 
 class Levenshtein(object):
@@ -42,61 +41,44 @@ class Levenshtein(object):
         return cost_table
 
     @staticmethod
-    def find_path(
-        cost_table: Dict[int, Dict[int, int]],
-        i: int = 0,
-        j: int = 0,
-        padding: bool = False
-    ) -> List[str]:
+    def find_path(cost_table, *args, **kwargs):
         """
         :cost_table: levenshtein distance table which is calculated Levenshtein.leven  # NOQA
-        :i: current_position of source string
-        :j: current_position of target string
-        :padding: whether or not to do padding
+        :*args: Not used. for backward compatible.
+        :**kwargs: Not used. for backward compatible.
         :return: return list of edit types
         """
 
-        if padding:
-            padded_table = []
-            for k in range(len(cost_table)):
-                padded_table.append(cost_table[k] + [sys.maxsize])
-            padded_table.append([sys.maxsize]*len(cost_table[0]))
+        n = len(cost_table)
+        m = len(cost_table[0])
 
-            cost_table = padded_table
-        n = len(cost_table) - 1
-        m = len(cost_table[0]) - 1
+        edit_table = []
+        for i in range(n):
+            edit_table.append(['']*m)
 
-        current_cost = cost_table[i][j]
+        NO = ['noedit']
+        REP = ['rep']
+        DEL = ['del']
+        INS = ['ins']
 
-        # reach end of the strings
-        if i + 1 == n and j + 1 == m:
-            return []
+        edit_table[0][0] = []
+        for i in range(1, n):
+            edit_table[i][0] = DEL * i
+        for j in range(1, m):
+            edit_table[0][j] = INS * j
 
-        replace = cost_table[i+1][j+1]
-        delete = cost_table[i+1][j]
-        insert = cost_table[i][j + 1]
+        for i in range(1, n):
+            for j in range(1, m):
+                replace = cost_table[i-1][j-1]
+                delete = cost_table[i-1][j]
+                insert = cost_table[i][j-1]
+                operations = [
+                    [NO if cost_table[i][j] == replace
+                        else REP, replace, edit_table[i-1][j-1]],
+                    [DEL, delete, edit_table[i-1][j]],
+                    [INS, insert, edit_table[i][j-1]],
+                ]
 
-        if any(map(lambda a: a < current_cost, [delete, insert, replace])):
-            # wrong path passed
-            return None
-
-        # check  not out of table
-        if replace != sys.maxsize:
-            ret = Levenshtein.find_path(cost_table, i+1, j+1)
-            if ret is not None:
-                if replace == current_cost:
-                    return ["noedit"] + ret
-                else:
-                    return ["rep"] + ret
-
-        # check not out of table and invalid pass
-        if delete != sys.maxsize and delete > current_cost:
-            ret = Levenshtein.find_path(cost_table, i+1, j)
-            if ret is not None:
-                return ["del"] + ret
-
-        # check not out of table and invalid pass
-        if insert is not sys.maxsize and insert > current_cost:
-            ret = Levenshtein.find_path(cost_table, i, j + 1)
-            if ret is not None:
-                return ["ins"] + ret
+                op = sorted(operations, key=lambda op: op[1])[0]
+                edit_table[i][j] = op[2] + op[0]
+        return edit_table[-1][-1]
