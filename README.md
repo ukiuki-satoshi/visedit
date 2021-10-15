@@ -33,6 +33,8 @@ text = se.generate_text(truncate=True)
 html = se.generate_html()
 ```
 
+![sample](https://user-images.githubusercontent.com/39693776/137411454-00ad2ff3-aa6b-46a7-8b79-5f9f0e3b61ec.png)
+
 ## Change color setting
 
 ```
